@@ -18,6 +18,17 @@ const commands = [
   '.exit'
 ];
 
+export const commandsOs = [
+  '--EOL',
+  '--cpus',
+  '--homedir',
+  '--username',
+  '--architecture',
+  'os'
+]
+
+
+
 
 const printCommands = () => {
   console.log('List of available commands:');

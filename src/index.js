@@ -1,5 +1,5 @@
-import { ls} from './operationWithFiles/ls.js';
-import {createFile} from './operationWithFiles/createFile.js'
+import {ls} from './operationWithFiles/ls.js';
+import {createFile} from './operationWithFiles/createFile.js';
 import {navigateUp, changeDirectory} from './operationWithFiles/navigate.js';
 import {readFile} from './operationWithFiles/readFile.js';
 import {printCommands} from './utils/commands.js';
@@ -8,15 +8,17 @@ import {
 	getPathFromInput,
 	getTwoPathsFromInput,
 	getUsername,
-	closeProgram
+	closeProgram,
 } from './utils/utils.js';
 import {renameFile} from './operationWithFiles/renameFile.js';
-import {moveFile} from './operationWithFiles/moveFile.js'
+import {moveFile} from './operationWithFiles/moveFile.js';
 
 import os from 'os';
-import { copyFile } from './operationWithFiles/copyFile.js';
-import { removeFile } from './operationWithFiles/removeFile.js';
-import { initOs } from './operationSystem/main.js';
+import {copyFile} from './operationWithFiles/copyFile.js';
+import {removeFile} from './operationWithFiles/removeFile.js';
+import {initOs} from './operationSystem/main.js';
+import {hashFile} from './hash/hash.js';
+import {compressFile} from './compress/compressFile.js';
 
 const start = async () => {
 	const username = getUsername();
@@ -56,18 +58,24 @@ const start = async () => {
 		if (userInput.startsWith('rm')) {
 			removeFile(getPathFromInput(userInput));
 		}
-		if(userInput.startsWith('os')){
-			initOs(getPathFromInput(userInput))
+		if (userInput.startsWith('os')) {
+			initOs(getPathFromInput(userInput));
 		}
+		if (userInput.startsWith('hash')) {
+			hashFile(getPathFromInput(userInput));
+		}
+		if (userInput.startsWith('compress')) {
+			compressFile(getTwoPathsFromInput(userInput));
+		}
+	
 	});
 
 	console.log(`Welcome to the File Manager, ${username}!`);
 	const homedir = os.homedir();
 	process.chdir(homedir);
-	printCurrentPosition();
+	
 	printCommands();
+	printCurrentPosition();
 };
 
-
-
-await start()
+await start();
